@@ -1,0 +1,30 @@
+<form action="https://formspree.io/f/xqkrgvqw" method="POST">  <!-- Replace with your actual ID -->
+  <input type="text" name="name" placeholder="Your Business Name" required>
+  <input type="email" name="_replyto" placeholder="Your Email" required>
+  <textarea name="message" placeholder="How can we automate your business?" required></textarea>
+  <input type="hidden" name="_subject" value="New Contact Request">
+  <button type="submit">Get Automated</button>
+</form>
+
+<div id="form-status" style="display:none; margin-top:20px; padding:10px; background:#e8f5e9; border-radius:4px;">
+  Thank you! We'll contact you soon about automating your business.
+</div>
+
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    // Add error handling
+    if (response.ok) {
+      form.reset();
+      document.getElementById('form-status').style.display = 'block';
+    } else {
+      alert('Submission failed. Please try again.');
+    }
+  });
+</script>
